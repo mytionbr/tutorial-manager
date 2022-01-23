@@ -1,7 +1,5 @@
-import { Application } from "express";
+import { Application } from 'express';
 
 export default class Router {
-    constructor(app: Application){
-        
-    }
+  constructor(private app: Application) {}
 }

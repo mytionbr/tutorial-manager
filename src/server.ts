@@ -1,5 +1,5 @@
-import { Application, json, urlencoded } from "express";
-import Router from "./routes";
+import { Application, json, urlencoded } from 'express';
+import Router from './routes';
 
 export default class Server {
   constructor(app: Application) {
