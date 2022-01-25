@@ -4,6 +4,7 @@ import { createConnection } from 'typeorm';
 import config from './config/config';
 import * as express from 'express';
 import Server from './server';
+import { Tutorial } from './entity/Tutorial';
 
 const { ormconfig, port } = config;
 const app: Application = express();

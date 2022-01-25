@@ -10,30 +10,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Tutorial = void 0;
-var typeorm_1 = require("typeorm");
-var Tutorial = /** @class */ (function () {
-    function Tutorial() {
-    }
-    __decorate([
-        (0, typeorm_1.PrimaryGeneratedColumn)(),
-        __metadata("design:type", Number)
-    ], Tutorial.prototype, "id", void 0);
-    __decorate([
-        (0, typeorm_1.Column)(),
-        __metadata("design:type", String)
-    ], Tutorial.prototype, "title", void 0);
-    __decorate([
-        (0, typeorm_1.Column)(),
-        __metadata("design:type", String)
-    ], Tutorial.prototype, "description", void 0);
-    __decorate([
-        (0, typeorm_1.Column)(),
-        __metadata("design:type", Boolean)
-    ], Tutorial.prototype, "published", void 0);
-    Tutorial = __decorate([
-        (0, typeorm_1.Entity)()
-    ], Tutorial);
-    return Tutorial;
-}());
+const typeorm_1 = require("typeorm");
+let Tutorial = class Tutorial {
+};
+__decorate([
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    __metadata("design:type", Number)
+], Tutorial.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Tutorial.prototype, "title", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Tutorial.prototype, "description", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Boolean)
+], Tutorial.prototype, "published", void 0);
+Tutorial = __decorate([
+    (0, typeorm_1.Entity)()
+], Tutorial);
 exports.Tutorial = Tutorial;
 //# sourceMappingURL=Tutorial.js.map

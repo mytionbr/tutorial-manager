@@ -10,12 +10,12 @@ var dbDetails = {
     port: process.env.DATABASE_PORT
 };
 var ormconfig = {
-    type: "postgres",
+    type: 'postgres',
     host: dbDetails.host,
     port: Number(dbDetails.port),
     username: dbDetails.user,
     password: dbDetails.password,
-    database: dbDetails.database,
+    database: dbDetails.database
 };
 var config = {
     port: process.env.PORT,

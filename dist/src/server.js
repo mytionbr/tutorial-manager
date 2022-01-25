@@ -1,17 +1,19 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = require("express");
-var routes_1 = require("./routes");
-var Server = /** @class */ (function () {
-    function Server(app) {
+const express_1 = require("express");
+const routes_1 = __importDefault(require("./routes"));
+class Server {
+    constructor(app) {
         this.config(app);
         new routes_1.default(app);
     }
-    Server.prototype.config = function (app) {
+    config(app) {
         app.use((0, express_1.urlencoded)({ extended: true }));
         app.use((0, express_1.json)());
-    };
-    return Server;
-}());
+    }
+}
 exports.default = Server;
 //# sourceMappingURL=server.js.map
