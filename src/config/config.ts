@@ -3,6 +3,8 @@ import { ConnectionOptions } from 'typeorm';
 
 dotenv.config();
 
+const isProd = process.env.MODE === 'prod';
+
 const dbDetails = {
   host: process.env.LOCAL_HOST,
   user: process.env.USER,
@@ -17,7 +19,10 @@ const ormconfig: ConnectionOptions = {
   port: Number(dbDetails.port),
   username: dbDetails.user,
   password: dbDetails.password,
-  database: dbDetails.database
+  database: dbDetails.database,
+  synchronize: true,
+  logging: false,
+  entities: [isProd ? 'src/entity/**/*.js' : 'src/entity/**/*.ts']
 };
 
 const config = {

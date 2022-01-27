@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { title } from 'process';
 import { Tutorial } from 'src/app/models/tutorial.model';
 import { TutorialService } from 'src/app/services/tutorial.service';
 
@@ -9,33 +8,31 @@ import { TutorialService } from 'src/app/services/tutorial.service';
   styleUrls: ['./add-tutorial.component.css']
 })
 export class AddTutorialComponent implements OnInit {
-
   tutorial: Tutorial = {
     title: '',
     description: '',
     published: false
-  }
+  };
+
   submitted = false;
 
-  constructor(private tutorialService: TutorialService) { }
+  constructor(private tutorialService: TutorialService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  saveTutorial(): void{ 
+  saveTutorial(): void {
     const data = {
       title: this.tutorial.title,
       description: this.tutorial.description
     };
 
-    this.tutorialService.create(data)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.submitted = true;
-        },
-        error: (e) => console.error(e)
-      })
+    this.tutorialService.create(data).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.submitted = true;
+      },
+      error: (e) => console.log(e)
+    });
   }
 
   newTutorial(): void {
@@ -44,7 +41,6 @@ export class AddTutorialComponent implements OnInit {
       title: '',
       description: '',
       published: false
-    }
+    };
   }
-
 }

@@ -9,14 +9,13 @@ import { TutorialService } from 'src/app/services/tutorial.service';
   styleUrls: ['./tutorial-details.component.css']
 })
 export class TutorialDetailsComponent implements OnInit {
-  
   @Input() viewMode = false;
 
   @Input() currentTutorial: Tutorial = {
     title: '',
     description: '',
     published: false
-  }
+  };
 
   message = '';
 
@@ -24,7 +23,7 @@ export class TutorialDetailsComponent implements OnInit {
     private tutorialService: TutorialService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     if (!this.viewMode) {
@@ -34,58 +33,59 @@ export class TutorialDetailsComponent implements OnInit {
   }
 
   getTutorial(id: string): void {
-    this.tutorialService.get(id)
+    this.tutorialService.get(id).subscribe({
+      next: (data) => {
+        this.currentTutorial = data[0];
+        console.log(data[0]);
+      },
+      error: (e) => console.error(e)
+    });
+  }
+
+  updatePublished(status: boolean): void {
+    const data = {
+      title: this.currentTutorial.description,
+      description: this.currentTutorial.description,
+      published: status
+    };
+
+    this.message = '';
+
+    this.tutorialService.update(this.currentTutorial.id, data).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.currentTutorial.published = status;
+        this.message = res.message
+          ? res.message
+          : 'The status was updated successfully';
+      },
+      error: (e) => console.error(e)
+    });
+  }
+
+  updateTutorial(): void {
+    this.message = '';
+
+    this.tutorialService
+      .update(this.currentTutorial.id, this.currentTutorial)
       .subscribe({
-        next: (data) => {
-          this.currentTutorial = data;
-          console.log(data);
+        next: (res) => {
+          console.log(res);
+          this.message = res.message
+            ? res.message
+            : 'This tutorial was updated successfully';
         },
         error: (e) => console.error(e)
-      })
-    }
+      });
+  }
 
-    updatePublished(status: boolean): void {
-      const data = {
-        title: this.currentTutorial.title,
-        description: this.currentTutorial.description,
-        published: status
-      }
-
-      this.message = '';
-      
-      this.tutorialService.update(this.currentTutorial.id, data)
-        .subscribe({
-          next: (res) => {
-            console.log(res);
-            this.currentTutorial.published = status;
-            this.message = res.message ? res.message : 'The status was updated successfully';
-          },
-          error: (e) => console.error(e)
-        })
-    }
-
-    updateTutorial(): void {
-      this.message = '';
-
-      this.tutorialService.update(this.currentTutorial.id, this.currentTutorial)
-        .subscribe({
-          next: (res) => {
-            console.log(res);
-            this.message = res.message ? res.message : 'This tutorial was updated successfully';
-          },
-          error: (e) => console.error(e)
-        })
-    }
-
-    deleteTutorial(): void {
-      this.tutorialService.delete(this.currentTutorial.id)
-        .subscribe({
-          next: (res) => {
-            console.log(res);
-            this.router.navigate(['/tutorials']);
-          },
-          error: (e) => console.error(e)
-        })
-    }
-
+  deleteTutorial(): void {
+    this.tutorialService.delete(this.currentTutorial.id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.router.navigate(['./tutorials']);
+      },
+      error: (e) => console.error(e)
+    });
+  }
 }

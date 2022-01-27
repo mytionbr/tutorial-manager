@@ -1,14 +1,24 @@
 import { Application, json, urlencoded } from 'express';
-import Router from './routes';
+import tutorialRoutes from './routes/tutorial';
+import * as cors from 'cors';
 
 export default class Server {
-  constructor(app: Application) {
-    this.config(app);
-    new Router(app);
+  constructor(private app: Application) {
+    this.config(this.app);
+    this.getRoutes(this.app);
   }
 
   public config(app: Application): void {
     app.use(urlencoded({ extended: true }));
     app.use(json());
+    app.use(cors());
+  }
+
+  public getRoutes(app: Application): void {
+    app.use('/api/tutorials', tutorialRoutes);
+  }
+
+  public getApp(): Application {
+    return this.app;
   }
 }
